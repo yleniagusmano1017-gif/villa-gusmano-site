@@ -1,0 +1,782 @@
+---
+const {
+  content,
+  whatsappUrl,
+  emailUrl,
+  bookingUrl,
+  airbnbUrl,
+  googleMapsUrl
+} = Astro.props;
+
+const nav = content.nav;
+const hero = content.hero;
+const why = content.why;
+const accommodations = content.accommodations;
+const position = content.position;
+const locationSection = content.location;
+const amenities = content.amenities;
+const contacts = content.contacts;
+const footer = content.footer;
+
+const currentPath = Astro.url.pathname;
+
+const currentLang =
+  currentPath.startsWith('/en')
+    ? 'en'
+    : currentPath.startsWith('/de')
+      ? 'de'
+      : 'it';
+---
+
+<header class="site-header">
+  <a class="site-logo" href="/">Villa Gusmano</a>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="#perche-scegliere">{nav.why}</a>
+    <a href="#alloggi">{nav.accommodations}</a>
+    <a href="#posizione">{nav.position}</a>
+    <a href="#dove-siamo">{nav.location}</a>
+    <a href="#contatti">{nav.contacts}</a>
+
+<span class="language-switcher" aria-label="Language selector">
+  <a
+    class={`language-switcher__item ${currentLang === 'it' ? 'is-active' : ''}`}
+    href="/it/"
+    aria-label="Italiano"
+  >
+    🇮🇹
+  </a>
+
+  <a
+    class={`language-switcher__item ${currentLang === 'en' ? 'is-active' : ''}`}
+    href="/en/"
+    aria-label="English"
+  >
+    🇬🇧
+  </a>
+
+  <a
+    class={`language-switcher__item ${currentLang === 'de' ? 'is-active' : ''}`}
+    href="/de/"
+    aria-label="Deutsch"
+  >
+    🇩🇪
+  </a>
+</span>
+  </nav>
+</header>
+
+  <section class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">{hero.eyebrow}</p>
+
+      <h1>{hero.title}</h1>
+
+      <p class="hero__text">
+        {hero.subtitle}
+      </p>
+
+      <div class="hero__actions">
+        <a class="button button--primary" href={whatsappUrl} target="_blank" rel="noopener">
+          {hero.whatsappCta}
+        </a>
+
+        <a class="button button--secondary" href={emailUrl}>
+          {hero.emailCta}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="perche-scegliere" class="section">
+    <p class="section__label">{why.label}</p>
+
+    <h2>{why.title}</h2>
+
+    <div class="features">
+      {why.cards.map((card) => (
+        <article class="card">
+          <h3>{card.title}</h3>
+          <p>{card.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="alloggi" class="section section--soft">
+    <p class="section__label">{accommodations.label}</p>
+
+    <h2>{accommodations.title}</h2>
+
+    <div class="units">
+      {accommodations.units.map((unit) => (
+        <article class="unit">
+          <p class="unit__tag">{unit.tag}</p>
+          <h3>{unit.title}</h3>
+
+          <ul class="unit__list">
+            {unit.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+
+          <p class="unit__ideal">
+            {unit.ideal}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="posizione" class="section location-section">
+    <p class="section__label">{position.label}</p>
+
+    <h2>{position.title}</h2>
+
+    <p class="location-section__intro">
+      {position.intro}
+    </p>
+
+    <div class="location-grid">
+      {position.cards.map((card) => (
+        <article class="location-card">
+          <strong>{card.title}</strong>
+          <span>{card.time}</span>
+
+          {card.note && <small>{card.note}</small>}
+
+          {card.items && (
+            <ul>
+              {card.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="dove-siamo" class="section map-section">
+    <p class="section__label">{locationSection.label}</p>
+
+    <h2>{locationSection.title}</h2>
+
+    <p class="map-section__text">
+      {locationSection.text}
+    </p>
+
+    <a class="button button--primary map-button" href={googleMapsUrl} target="_blank" rel="noopener">
+      {locationSection.button}
+    </a>
+  </section>
+
+  <section class="section amenities-section">
+    <p class="section__label">{amenities.label}</p>
+
+    <h2>{amenities.title}</h2>
+
+    <div class="amenities-grid">
+      {amenities.items.map((item) => (
+        <article class="amenity-card">
+          <span>{item}</span>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="contatti" class="section booking-section">
+    <p class="section__label">{contacts.label}</p>
+
+    <h2>{contacts.title}</h2>
+
+    <p class="booking-section__text">
+      {contacts.text}
+    </p>
+
+    <div class="booking-actions">
+      <a class="button button--primary booking-button" href={whatsappUrl} target="_blank" rel="noopener">
+        {contacts.whatsapp}
+      </a>
+
+      <a class="button button--secondary booking-button" href={emailUrl}>
+        {contacts.email}
+      </a>
+
+      <a class="button button--secondary booking-button" href={bookingUrl} target="_blank" rel="noopener">
+        {contacts.booking}
+      </a>
+
+      <a class="button button--secondary booking-button" href={airbnbUrl} target="_blank" rel="noopener">
+        {contacts.airbnb}
+      </a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="site-footer__content">
+      <div class="site-footer__brand">
+        <h3>Villa Gusmano</h3>
+        <p>{footer.description}</p>
+      </div>
+
+      <div class="site-footer__links">
+        <a href="#perche-scegliere">{nav.why}</a>
+        <a href="#alloggi">{nav.accommodations}</a>
+        <a href="#posizione">{nav.position}</a>
+        <a href="#dove-siamo">{nav.location}</a>
+        <a href="#contatti">{nav.contacts}</a>
+      </div>
+
+      <div class="site-footer__contacts">
+        <a href={whatsappUrl} target="_blank" rel="noopener">{contacts.whatsapp}</a>
+        <a href={bookingUrl} target="_blank" rel="noopener">{contacts.booking}</a>
+        <a href={airbnbUrl} target="_blank" rel="noopener">{contacts.airbnb}</a>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      {footer.rights}
+    </div>
+  </footer>
+</main>
+
+<style>
+  @font-face {
+    font-family: "Great Vibes";
+    src: url("/fonts/great-vibes.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --color-green: #516b48;
+    --color-green-dark: #263424;
+    --color-sand: #f4efe6;
+    --color-white: #ffffff;
+    --color-text: #1f261f;
+    --color-muted: #657064;
+    --shadow-card: 0 18px 50px rgba(38, 52, 36, 0.12);
+    --radius-large: 28px;
+    --radius-medium: 20px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family:
+      Inter,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    color: var(--color-text);
+    background: var(--color-sand);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .site-header {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    z-index: 20;
+    width: min(calc(100% - 32px), 1120px);
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 10px 12px 10px 22px;
+    border-radius: 999px;
+    background: rgba(38, 52, 36, 0.78);
+    color: var(--color-white);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(16px);
+    transform: translateX(-50%);
+  }
+
+  .site-logo {
+    font-family: "Great Vibes", cursive;
+    font-size: 1.55rem;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.site-nav a,
+.language-switcher__item,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 800;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background-color 0.22s ease,
+    color 0.22s ease;
+}
+
+.site-nav a {
+  min-height: 38px;
+  padding: 9px 13px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 2px;
+}
+
+.language-switcher__item {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  overflow: hidden;
+  font-size: 1rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  transition: all 0.22s ease;
+  opacity: 0.82;
+}
+
+.language-switcher__item.is-active {
+  background: var(--color-white);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.site-nav a:hover,
+.language-switcher__item:hover,
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.site-nav > a:last-child {
+  background: var(--color-white);
+  color: var(--color-green-dark);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+  .page {
+    min-height: 100vh;
+  }
+
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 120px 20px 56px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(38, 52, 36, 0.62) 0%,
+        rgba(38, 52, 36, 0.38) 42%,
+        rgba(20, 28, 19, 0.74) 100%
+      ),
+      url("/images/hero-villa-gusmano.jpg") center 28% / cover no-repeat;
+  }
+
+  .hero__content {
+    width: min(100%, 1080px);
+    margin: 0 auto;
+    color: var(--color-white);
+    transform: translateY(44px);
+  }
+
+  .eyebrow,
+  .section__label {
+    margin: 0 0 14px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    transform: translateY(-72px);
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  h1 {
+    max-width: 760px;
+    margin-bottom: 40px;
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(5.4rem, 11vw, 9rem);
+    font-weight: 400;
+    line-height: 0.9;
+    text-shadow:
+      4px 6px 8px rgba(0, 0, 0, 0.62),
+      0 16px 36px rgba(0, 0, 0, 0.68);
+  }
+
+  .hero__text {
+    max-width: 680px;
+    margin-bottom: 42px;
+    font-size: clamp(1.08rem, 2.2vw, 1.42rem);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.42);
+  }
+
+  .hero__actions,
+  .booking-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .button {
+    min-height: 52px;
+    padding: 14px 24px;
+    text-align: center;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+  }
+
+  .button--primary {
+    background: var(--color-white);
+    color: var(--color-green-dark);
+  }
+
+  .button--secondary {
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .section {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: 76px 20px;
+  }
+
+  .section--soft,
+  .map-section {
+    width: 100%;
+    padding-left: max(20px, calc((100vw - 1120px) / 2 + 20px));
+    padding-right: max(20px, calc((100vw - 1120px) / 2 + 20px));
+    background: var(--color-white);
+  }
+
+  .section__label {
+    color: var(--color-green);
+  }
+
+  h2 {
+    max-width: 760px;
+    margin-bottom: 28px;
+    font-size: clamp(2rem, 7vw, 4.2rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--color-green-dark);
+  }
+
+  .features,
+  .units,
+  .location-grid,
+  .amenities-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .card,
+  .unit,
+  .location-card,
+  .amenity-card {
+    padding: 30px;
+    border-radius: var(--radius-medium);
+    background: var(--color-white);
+    box-shadow: var(--shadow-card);
+  }
+
+  .section--soft .unit {
+    background: var(--color-sand);
+  }
+
+  h3 {
+    margin-bottom: 12px;
+    font-size: 1.35rem;
+    color: var(--color-green-dark);
+  }
+
+  .card p,
+  .unit p,
+  .location-section__intro,
+  .map-section__text {
+    color: var(--color-muted);
+    line-height: 1.75;
+  }
+
+  .unit__tag {
+    display: inline-flex;
+    margin-bottom: 14px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(81, 107, 72, 0.12);
+    color: var(--color-green);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .unit__list {
+    display: grid;
+    gap: 8px;
+    margin: 18px 0;
+    padding-left: 18px;
+    line-height: 1.55;
+  }
+
+  .unit__ideal {
+    padding-top: 16px;
+    border-top: 1px solid rgba(81, 107, 72, 0.18);
+    font-weight: 800;
+    color: var(--color-green-dark) !important;
+  }
+
+  .location-card > strong {
+    display: block;
+    font-size: 1.6rem;
+    color: #21331f;
+  }
+
+  .location-card > span {
+    display: block;
+    margin-top: 0.35rem;
+    font-weight: 800;
+    color: #21331f;
+  }
+
+  .nearby-box {
+    margin-top: 18px;
+    padding: 28px;
+    border-radius: var(--radius-large);
+    background: var(--color-green-dark);
+    color: var(--color-white);
+  }
+
+  .nearby-list {
+    display: grid;
+    gap: 14px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .map-button {
+    background: var(--color-green-dark);
+    color: var(--color-white);
+  }
+
+  .booking-section {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(38, 52, 36, 0.98) 0%,
+        rgba(31, 44, 30, 1) 100%
+      );
+    color: var(--color-white);
+  }
+
+  .booking-section .section__label,
+  .booking-section h2 {
+    color: var(--color-white);
+  }
+
+  .booking-section__text {
+    max-width: 680px;
+    margin-bottom: 34px;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 1.08rem;
+    line-height: 1.85;
+  }
+
+  .booking-button {
+    min-width: 160px;
+  }
+
+  .booking-section .button--secondary {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .site-footer {
+    padding: 44px 20px 26px;
+    background: #182017;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .site-footer__content {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .site-footer__brand h3 {
+    font-family: "Great Vibes", cursive;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--color-white);
+  }
+
+  .site-footer__links,
+  .site-footer__contacts {
+    display: grid;
+    gap: 12px;
+  }
+
+  .site-footer__bottom {
+    width: min(100%, 1120px);
+    margin: 34px auto 0;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.56);
+  }
+
+  @media (max-width: 640px) {
+    .site-header {
+      top: 8px;
+      width: min(calc(100% - 18px), 1120px);
+      min-height: 60px;
+      padding: 10px 10px 10px 18px;
+    }
+
+    .site-logo {
+      font-size: 1.42rem;
+    }
+
+.site-nav > a {
+  display: none;
+}
+
+.site-nav > a:nth-of-type(4),
+.site-nav > a:last-child {
+  display: inline-flex;
+  min-height: 40px;
+  padding: 10px 12px;
+}
+
+.language-switcher {
+  display: inline-flex;
+  gap: 4px;
+  margin: 0;
+}
+
+.language-switcher__item {
+  width: 30px;
+  height: 30px;
+  font-size: 0.9rem;
+}
+
+    .hero {
+      min-height: 88vh;
+      padding: 118px 18px 52px;
+      background-position: center top;
+    }
+
+    .hero__content {
+      transform: translateY(18px);
+    }
+
+    .eyebrow {
+      transform: translateY(-34px);
+      font-size: 0.72rem;
+    }
+
+    h1 {
+      margin-bottom: 28px;
+      font-size: clamp(3.6rem, 18vw, 5rem);
+      line-height: 0.98;
+    }
+
+    .hero__text {
+      margin-bottom: 34px;
+      font-size: 1.04rem;
+      line-height: 1.72;
+    }
+
+    .button,
+    .booking-button {
+      width: 100%;
+      min-height: 54px;
+    }
+
+    .section {
+      padding: 68px 20px;
+    }
+
+    .site-footer__content {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (min-width: 760px) {
+    .hero {
+      padding: 135px 48px 64px;
+    }
+
+    .features {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .units {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .units .unit:nth-child(3) {
+      grid-column: 1 / -1;
+      width: min(100%, 540px);
+      justify-self: center;
+    }
+
+    .location-grid,
+    .amenities-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .card,
+    .unit {
+      padding: 34px;
+    }
+  }
+</style>

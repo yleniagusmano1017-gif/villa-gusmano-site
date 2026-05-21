@@ -1,0 +1,142 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  pathname?: string;
+}
+
+const {
+  title,
+  description,
+  lang = 'it',
+  pathname = '/'
+} = Astro.props;
+
+const siteUrl = 'https://www.villagusmano.it';
+const canonicalUrl = pathname === '/' ? siteUrl : `${siteUrl}${pathname}`;
+const ogImage = `${siteUrl}/images/hero-villa-gusmano.jpg`;
+
+const ogLocale =
+  lang === 'en'
+    ? 'en_GB'
+    : lang === 'de'
+      ? 'de_DE'
+      : 'it_IT';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'VacationRental',
+  name: 'Villa Gusmano',
+  description:
+    'Casa vacanza a Piedimonte Etneo con appartamento e suite panoramica affittabili separatamente o insieme, piscina, giardino e vista Etna.',
+  url: siteUrl,
+  telephone: '+39 347 728 0977',
+  email: 'terminegiuseppa@hotmail.it',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Piedimonte Etneo',
+    addressRegion: 'Sicilia',
+    addressCountry: 'IT'
+  },
+  amenityFeature: [
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Piscina',
+      value: true
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Wi-Fi',
+      value: true
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Parcheggio',
+      value: true
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Aria condizionata',
+      value: true
+    },
+    {
+      '@type': 'LocationFeatureSpecification',
+      name: 'Terrazza panoramica',
+      value: true
+    }
+  ],
+  sameAs: [
+    'https://www.booking.com/hotel/it/villa-gusmano.it.html',
+    'https://www.airbnb.it/rooms/17999992'
+  ]
+};
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta name="theme-color" content="#516b48" />
+    <meta name="apple-mobile-web-app-title" content="Villa Gusmano" />
+    <meta name="application-name" content="Villa Gusmano" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="alternate" hreflang="it" href={`${siteUrl}/it/`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`} />
+    <link rel="alternate" hreflang="de" href={`${siteUrl}/de/`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Villa Gusmano" />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link
+      rel="preload"
+      href="/fonts/great-vibes.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-557CDYD0HC"
+    ></script>
+
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+      gtag('config', 'G-557CDYD0HC');
+    </script>
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

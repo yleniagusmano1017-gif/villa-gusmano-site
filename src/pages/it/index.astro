@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomePage from '../../components/HomePage.astro';
+import { homeContent } from '../../content/homeContent.js';
+
+const content = homeContent.it;
+
+const whatsappNumber = '393477280977';
+const email = 'terminegiuseppa@hotmail.it';
+const bookingUrl = 'https://www.booking.com/hotel/it/villa-gusmano.it.html';
+const airbnbUrl = 'https://www.airbnb.it/rooms/17999992';
+const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Villa%20Gusmano%20Piedimonte%20Etneo';
+
+const whatsappMessage = encodeURIComponent(
+  'Ciao, vorrei ricevere informazioni per un soggiorno a Villa Gusmano.'
+);
+
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+const emailUrl = `mailto:${email}?subject=Richiesta informazioni Villa Gusmano`;
+---
+
+<BaseLayout
+  title={content.seo.title}
+  description={content.seo.description}
+  lang="it"
+  pathname="/it/"
+>
+  <HomePage
+    content={content}
+    whatsappUrl={whatsappUrl}
+    emailUrl={emailUrl}
+    bookingUrl={bookingUrl}
+    airbnbUrl={airbnbUrl}
+    googleMapsUrl={googleMapsUrl}
+  />
+</BaseLayout>

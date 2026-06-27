@@ -1,0 +1,136 @@
+<div
+  id="cookie-banner"
+  class="cookie-banner"
+>
+  <div class="cookie-banner__content">
+    <p>
+      Questo sito utilizza cookie tecnici e analytics per migliorare
+      l’esperienza di navigazione.
+    </p>
+
+    <div class="cookie-banner__actions">
+      <button id="cookie-accept">
+        Accetta
+      </button>
+
+      <button id="cookie-reject">
+        Rifiuta
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner');
+
+  const acceptBtn = document.getElementById('cookie-accept');
+
+  const rejectBtn = document.getElementById('cookie-reject');
+
+  const consent = localStorage.getItem('villa-cookie-consent');
+
+  if (consent) {
+    banner.style.display = 'none';
+  }
+
+  acceptBtn?.addEventListener('click', () => {
+    localStorage.setItem('villa-cookie-consent', 'accepted');
+
+    banner.style.display = 'none';
+  });
+
+  rejectBtn?.addEventListener('click', () => {
+    localStorage.setItem('villa-cookie-consent', 'rejected');
+
+    banner.style.display = 'none';
+  });
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: min(calc(100% - 24px), 760px);
+    padding: 18px;
+    border-radius: 24px;
+    background: rgba(24, 32, 23, 0.94);
+    backdrop-filter: blur(18px);
+    color: white;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+  }
+
+  .cookie-banner__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .cookie-banner p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .cookie-banner__actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .cookie-banner button {
+    border: none;
+    border-radius: 999px;
+    min-height: 46px;
+    padding: 0 20px;
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .cookie-banner button:hover {
+    transform: translateY(-1px);
+  }
+
+  #cookie-accept {
+    background: white;
+    color: #263424;
+  }
+
+  #cookie-reject {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  @media (max-width: 640px) {
+    .cookie-banner {
+      bottom: 14px;
+      padding: 16px;
+      border-radius: 22px;
+    }
+
+    .cookie-banner__content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cookie-banner__actions {
+      width: 100%;
+    }
+
+    .cookie-banner button {
+      flex: 1;
+    }
+
+    .cookie-banner p {
+      font-size: 0.92rem;
+    }
+  }
+</style>

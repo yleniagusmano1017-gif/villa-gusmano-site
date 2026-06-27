@@ -4,6 +4,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.villagusmano.it',
+  site: 'https://www.villagusmano.com',
   integrations: [sitemap()],
 });

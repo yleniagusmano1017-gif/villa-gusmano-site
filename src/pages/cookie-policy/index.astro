@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Cookie Policy | Villa Gusmano';
+const description =
+  'Cookie Policy del sito Villa Gusmano.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang="it"
+>
+  <main class="legal-page">
+    <section class="legal-page__content">
+      <a class="legal-page__back" href="/it/">← Torna al sito</a>
+
+      <h1>Cookie Policy</h1>
+
+      <p>
+        Questa pagina descrive l’utilizzo dei cookie da parte del sito
+        Villa Gusmano.
+      </p>
+
+      <h2>Cosa sono i cookie</h2>
+
+      <p>
+        I cookie sono piccoli file di testo salvati sul dispositivo
+        dell’utente durante la navigazione.
+      </p>
+
+      <h2>Cookie tecnici</h2>
+
+      <p>
+        Il sito utilizza cookie tecnici necessari al corretto funzionamento
+        della navigazione e dell’esperienza utente.
+      </p>
+
+      <h2>Cookie analytics</h2>
+
+      <p>
+        Eventuali strumenti statistici, come Google Analytics,
+        possono essere utilizzati solo previo consenso dell’utente.
+      </p>
+
+      <h2>Servizi di terze parti</h2>
+
+      <p>
+        Il sito può contenere collegamenti esterni a servizi come
+        WhatsApp, Booking, Airbnb e Google Maps.
+      </p>
+
+      <h2>Gestione dei cookie</h2>
+
+      <p>
+        L’utente può gestire o disabilitare i cookie direttamente
+        dalle impostazioni del proprio browser.
+      </p>
+
+      <p class="legal-page__updated">
+        Ultimo aggiornamento: Maggio 2026
+      </p>
+    </section>
+  </main>
+
+  <style>
+    .legal-page {
+      min-height: 100vh;
+      padding: 120px 20px 80px;
+      background: #f4efe6;
+      color: #1f261f;
+    }
+
+    .legal-page__content {
+      width: min(100%, 860px);
+      margin: 0 auto;
+      padding: 42px;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: 0 18px 50px rgba(38, 52, 36, 0.12);
+    }
+
+    .legal-page__back {
+      display: inline-flex;
+      margin-bottom: 28px;
+      color: #516b48;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      color: #263424;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      line-height: 1;
+    }
+
+    h2 {
+      margin: 34px 0 12px;
+      color: #263424;
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: #657064;
+      line-height: 1.75;
+    }
+
+    .legal-page__updated {
+      margin-top: 34px;
+      font-size: 0.9rem;
+      color: #7b8579;
+    }
+
+    @media (max-width: 640px) {
+      .legal-page {
+        padding: 96px 16px 56px;
+      }
+
+      .legal-page__content {
+        padding: 28px;
+        border-radius: 22px;
+      }
+    }
+  </style>
+</BaseLayout>

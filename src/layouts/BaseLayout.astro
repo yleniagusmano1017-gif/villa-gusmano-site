@@ -13,9 +13,9 @@ const {
   pathname = '/'
 } = Astro.props;
 
-const siteUrl = 'https://www.villagusmano.it';
+const siteUrl = 'https://www.villagusmano.com';
 const canonicalUrl = pathname === '/' ? siteUrl : `${siteUrl}${pathname}`;
-const ogImage = `${siteUrl}/images/hero-villa-gusmano.jpg`;
+const ogImage = `${siteUrl}/images/hero-villa-gusmano.png`;
 
 const ogLocale =
   lang === 'en'
@@ -114,26 +114,33 @@ const structuredData = {
       crossorigin
     />
 
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-557CDYD0HC"
-    ></script>
+<script is:inline>
+  const analyticsConsent = localStorage.getItem('villa-cookie-consent');
 
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
+  if (analyticsConsent === 'accepted') {
+    const analyticsScript = document.createElement('script');
 
-      function gtag() {
-        dataLayer.push(arguments);
-      }
+    analyticsScript.async = true;
+    analyticsScript.src =
+      'https://www.googletagmanager.com/gtag/js?id=G-557CDYD0HC';
 
-      gtag('js', new Date());
-      gtag('config', 'G-557CDYD0HC');
-    </script>
+    document.head.appendChild(analyticsScript);
 
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify(structuredData)}
-    />
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-557CDYD0HC');
+  }
+</script>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(structuredData)}
+/>
   </head>
 
   <body>

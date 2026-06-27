@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Privacy Policy | Villa Gusmano';
+const description =
+  'Informativa privacy del sito Villa Gusmano, casa vacanza a Piedimonte Etneo, Sicilia.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang="it"
+>
+  <main class="legal-page">
+    <section class="legal-page__content">
+      <a class="legal-page__back" href="/it/">← Torna al sito</a>
+
+      <h1>Privacy Policy</h1>
+
+      <p>
+        La presente informativa descrive come vengono trattati i dati personali
+        degli utenti che visitano il sito web di Villa Gusmano.
+      </p>
+
+      <h2>Titolare del trattamento</h2>
+      <p>
+        Il titolare del trattamento è Villa Gusmano, struttura ricettiva situata
+        a Piedimonte Etneo, Sicilia.
+      </p>
+
+      <h2>Dati trattati</h2>
+      <p>
+        Il sito può trattare dati forniti volontariamente dall’utente, ad esempio
+        tramite contatto WhatsApp, email o piattaforme esterne di prenotazione.
+      </p>
+
+      <h2>Finalità del trattamento</h2>
+      <p>
+        I dati vengono utilizzati per rispondere a richieste di informazioni,
+        disponibilità, prenotazioni e comunicazioni relative al soggiorno.
+      </p>
+
+      <h2>Servizi esterni</h2>
+      <p>
+        Il sito può contenere collegamenti a servizi esterni come WhatsApp,
+        Booking, Airbnb e Google Maps. L’utilizzo di tali servizi è soggetto alle
+        rispettive informative privacy.
+      </p>
+
+      <h2>Statistiche</h2>
+      <p>
+        Il sito può utilizzare strumenti di analisi, come Google Analytics, solo
+        previo consenso dell’utente ove richiesto.
+      </p>
+
+      <h2>Diritti dell’utente</h2>
+      <p>
+        L’utente può richiedere informazioni, aggiornamento o cancellazione dei
+        propri dati personali contattando la struttura.
+      </p>
+
+      <h2>Contatti</h2>
+      <p>
+        Per richieste relative alla privacy è possibile scrivere a:
+        <a href="mailto:terminegiuseppa@hotmail.it">
+          terminegiuseppa@hotmail.it
+        </a>
+      </p>
+
+      <p class="legal-page__updated">
+        Ultimo aggiornamento: Maggio 2026
+      </p>
+    </section>
+  </main>
+
+  <style>
+    .legal-page {
+      min-height: 100vh;
+      padding: 120px 20px 80px;
+      background: #f4efe6;
+      color: #1f261f;
+    }
+
+    .legal-page__content {
+      width: min(100%, 860px);
+      margin: 0 auto;
+      padding: 42px;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: 0 18px 50px rgba(38, 52, 36, 0.12);
+    }
+
+    .legal-page__back {
+      display: inline-flex;
+      margin-bottom: 28px;
+      color: #516b48;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      color: #263424;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      line-height: 1;
+    }
+
+    h2 {
+      margin: 34px 0 12px;
+      color: #263424;
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: #657064;
+      line-height: 1.75;
+    }
+
+    a {
+      color: #516b48;
+      font-weight: 800;
+    }
+
+    .legal-page__updated {
+      margin-top: 34px;
+      font-size: 0.9rem;
+      color: #7b8579;
+    }
+
+    @media (max-width: 640px) {
+      .legal-page {
+        padding: 96px 16px 56px;
+      }
+
+      .legal-page__content {
+        padding: 28px;
+        border-radius: 22px;
+      }
+    }
+  </style>
+</BaseLayout>

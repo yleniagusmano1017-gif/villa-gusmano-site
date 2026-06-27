@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.villagusmano.it/sitemap-index.xml
+Sitemap: https://www.villagusmano.com/sitemap-index.xml

@@ -1,7 +1,7 @@
 export const homeContent = {
   it: {
     seo: {
-      title: 'Villa Gusmano | Casa Vacanza tra Etna e Taormina',
+      title: 'Villa Gusmano Piedimonte Etneo | Casa Vacanza con Piscina',
       description:
         'Villa Gusmano è una casa vacanza con piscina a Piedimonte Etneo, tra Etna, Taormina e mare.'
     },
@@ -252,7 +252,7 @@ export const homeContent = {
 
   en: {
     seo: {
-      title: 'Villa Gusmano | Holiday Home between Etna and Taormina',
+      title: 'Villa Gusmano Piedimonte Etneo | Holiday Home with Pool',
       description:
         'Villa Gusmano is a holiday home with pool in Piedimonte Etneo, Sicily, between Mount Etna, Taormina and the sea.'
     },
@@ -504,7 +504,7 @@ export const homeContent = {
 
   de: {
     seo: {
-      title: 'Villa Gusmano | Ferienhaus zwischen Ätna und Taormina',
+      title: 'Villa Gusmano Piedimonte Etneo | Ferienhaus mit Pool',
       description:
         'Villa Gusmano ist ein Ferienhaus mit Pool in Piedimonte Etneo, Sizilien, zwischen Ätna, Taormina und Meer.'
     },

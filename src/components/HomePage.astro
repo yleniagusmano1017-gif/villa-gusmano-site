@@ -161,7 +161,14 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
       </p>
 
       <div class="hero__actions">
-        <a class="button button--primary" href={whatsappUrl} target="_blank" rel="noopener">
+        <a
+          class="button button--primary"
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener"
+          data-analytics-event="click_whatsapp"
+          data-analytics-location="hero"
+        >
           <span class="button__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <path
@@ -181,7 +188,12 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
           {hero.whatsappCta}
         </a>
 
-        <a class="button button--secondary" href={emailUrl}>
+        <a
+          class="button button--secondary"
+          href={emailUrl}
+          data-analytics-event="click_email"
+          data-analytics-location="hero"
+        >
           <span class="button__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <path
@@ -352,7 +364,14 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
 
     <p class="map-section__text">{locationSection.text}</p>
 
-    <a class="button button--primary map-button" href={googleMapsUrl} target="_blank" rel="noopener">
+    <a
+      class="button button--primary map-button"
+      href={googleMapsUrl}
+      target="_blank"
+      rel="noopener"
+      data-analytics-event="click_maps"
+      data-analytics-location="location_section"
+    >
       {locationSection.button}
     </a>
   </section>
@@ -377,7 +396,14 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
     <p class="booking-section__text">{contacts.text}</p>
 
     <div class="booking-actions">
-      <a class="button button--primary booking-button" href={whatsappUrl} target="_blank" rel="noopener">
+      <a
+        class="button button--primary booking-button"
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener"
+        data-analytics-event="click_whatsapp"
+        data-analytics-location="contacts"
+      >
         <span class="button__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24">
             <path
@@ -397,7 +423,12 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
         {contacts.whatsapp}
       </a>
 
-      <a class="button button--secondary booking-button" href={emailUrl}>
+      <a
+        class="button button--secondary booking-button"
+        href={emailUrl}
+        data-analytics-event="click_email"
+        data-analytics-location="contacts"
+      >
         <span class="button__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24">
             <path
@@ -420,11 +451,25 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
         {contacts.email}
       </a>
 
-      <a class="button button--secondary booking-button" href={bookingUrl} target="_blank" rel="noopener">
+      <a
+        class="button button--secondary booking-button"
+        href={bookingUrl}
+        target="_blank"
+        rel="noopener"
+        data-analytics-event="click_booking"
+        data-analytics-location="contacts"
+      >
         {contacts.booking}
       </a>
 
-      <a class="button button--secondary booking-button" href={airbnbUrl} target="_blank" rel="noopener">
+      <a
+        class="button button--secondary booking-button"
+        href={airbnbUrl}
+        target="_blank"
+        rel="noopener"
+        data-analytics-event="click_airbnb"
+        data-analytics-location="contacts"
+      >
         {contacts.airbnb}
       </a>
     </div>
@@ -446,15 +491,33 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
       </div>
 
       <div class="site-footer__contacts">
-        <a href={whatsappUrl} target="_blank" rel="noopener">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener"
+          data-analytics-event="click_whatsapp"
+          data-analytics-location="footer"
+        >
           {contacts.whatsapp}
         </a>
 
-        <a href={bookingUrl} target="_blank" rel="noopener">
+        <a
+          href={bookingUrl}
+          target="_blank"
+          rel="noopener"
+          data-analytics-event="click_booking"
+          data-analytics-location="footer"
+        >
           {contacts.booking}
         </a>
 
-        <a href={airbnbUrl} target="_blank" rel="noopener">
+        <a
+          href={airbnbUrl}
+          target="_blank"
+          rel="noopener"
+          data-analytics-event="click_airbnb"
+          data-analytics-location="footer"
+        >
           {contacts.airbnb}
         </a>
 
@@ -495,6 +558,8 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
     target="_blank"
     rel="noopener"
     aria-label={contacts.whatsapp}
+    data-analytics-event="click_whatsapp"
+    data-analytics-location="floating_button"
   >
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -522,11 +587,33 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
   const photoDialogClose = document.querySelector('[data-photo-dialog-close]');
   const photoDialogPrev = document.querySelector('[data-photo-dialog-prev]');
   const photoDialogNext = document.querySelector('[data-photo-dialog-next]');
+  const analyticsLinks = document.querySelectorAll('[data-analytics-event]');
   let activeDialogImages = [];
   let activeDialogIndex = 0;
   let activeGalleryMainButton = null;
   let activeGalleryMainImage = null;
   let activeGalleryThumbs = [];
+
+  const trackAnalyticsClick = (link) => {
+    const analyticsConsent = localStorage.getItem('villa-cookie-consent');
+
+    if (analyticsConsent !== 'accepted' || typeof window.gtag !== 'function') {
+      return;
+    }
+
+    window.gtag('event', link.dataset.analyticsEvent, {
+      link_text: link.textContent?.trim() || link.getAttribute('aria-label') || '',
+      link_url: link.href,
+      link_location: link.dataset.analyticsLocation || '',
+      transport_type: 'beacon'
+    });
+  };
+
+  analyticsLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      trackAnalyticsClick(link);
+    });
+  });
 
   const showDialogImage = (index) => {
     if (!photoDialogImage || activeDialogImages.length === 0) {

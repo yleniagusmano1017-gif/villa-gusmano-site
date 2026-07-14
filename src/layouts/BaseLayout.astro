@@ -128,12 +128,12 @@ const structuredData = {
 
     window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
+    window.gtag = function gtag() {
       dataLayer.push(arguments);
-    }
+    };
 
-    gtag('js', new Date());
-    gtag('config', 'G-557CDYD0HC');
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-557CDYD0HC');
   }
 </script>
 

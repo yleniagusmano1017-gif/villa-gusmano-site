@@ -1144,15 +1144,23 @@ const accommodationUnits = accommodations.units.map(prepareAccommodationGallery)
     z-index: 2;
     width: 48px;
     height: 48px;
-    border: 0;
+    border: 1px solid rgba(255, 255, 255, 0.34);
     border-radius: 999px;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.92);
-    color: var(--color-green-dark);
+    background: rgba(12, 18, 12, 0.18);
+    color: white;
     font-size: 2.4rem;
     line-height: 1;
     transform: translateY(-50%);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.46);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(2px);
+  }
+
+  .photo-dialog__nav:hover,
+  .photo-dialog__nav:focus-visible {
+    background: rgba(12, 18, 12, 0.3);
+    border-color: rgba(255, 255, 255, 0.54);
   }
 
   .photo-dialog__nav--prev {
